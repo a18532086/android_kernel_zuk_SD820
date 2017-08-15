@@ -19,7 +19,7 @@ module(){
 dtbuild(){
   ./tools/dtbToolCM -2 -o $objdir/arch/arm64/boot/dt.img -s 4096 -p $objdir/scripts/dtc/ $objdir/arch/arm64/boot/dts/
 }
-#complie
+compile
 module
 #dtbuild
 #cp $objdir/arch/arm64/boot/zImage $sourcedir/zImage
