@@ -370,14 +370,14 @@ struct ipa_uc_pending_event {
 	uint8_t mac_addr[VOS_MAC_ADDR_SIZE];
 };
 
-static const char *op_string[HDD_IPA_UC_OPCODE_MAX] = {
+/*static const char *op_string[HDD_IPA_UC_OPCODE_MAX] = {
 	"TX_SUSPEND",
 	"TX_RESUME",
 	"RX_SUSPEND",
 	"RX_RESUME",
 	"STATS",
 	"OPCODE_MAX"
-};
+};*/
 
 struct uc_rm_work_struct {
 	struct work_struct work;

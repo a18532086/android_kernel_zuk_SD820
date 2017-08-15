@@ -12558,36 +12558,6 @@ void sme_UpdateEnableSSR(tHalHandle hHal, tANI_BOOLEAN enableSSR)
 }
 
 /*
- * SME API to stringify bonding mode. (hostapd convention)
- */
-
-static const char* sme_CBMode2String( tANI_U32 mode)
-{
-   switch (mode)
-   {
-      case eCSR_INI_SINGLE_CHANNEL_CENTERED:
-         return "HT20";
-      case eCSR_INI_DOUBLE_CHANNEL_HIGH_PRIMARY:
-         return "HT40-"; /* lower secondary channel */
-      case eCSR_INI_DOUBLE_CHANNEL_LOW_PRIMARY:
-         return "HT40+"; /* upper secondary channel */
-#ifdef WLAN_FEATURE_11AC
-      case eCSR_INI_QUADRUPLE_CHANNEL_20MHZ_LOW_40MHZ_LOW:
-         return "VHT80+40+"; /* upper secondary channels */
-      case eCSR_INI_QUADRUPLE_CHANNEL_20MHZ_HIGH_40MHZ_LOW:
-         return "VHT80+40-"; /* 1 lower and 2 upper secondary channels */
-      case eCSR_INI_QUADRUPLE_CHANNEL_20MHZ_LOW_40MHZ_HIGH:
-         return "VHT80-40+"; /* 2 lower and 1 upper secondary channels */
-      case eCSR_INI_QUADRUPLE_CHANNEL_20MHZ_HIGH_40MHZ_HIGH:
-         return "VHT80-40-"; /* lower secondary channels */
-#endif
-      default:
-         VOS_ASSERT(0);
-         return "Unknown";
-   }
-}
-
-/*
  * SME API to adjust bonding mode to regulatory, dfs nol .. etc.
  *
  */

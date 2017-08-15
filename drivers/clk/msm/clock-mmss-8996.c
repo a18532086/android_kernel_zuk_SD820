@@ -3466,11 +3466,11 @@ static void msm_mmsscc_8996_v3_fixup(void)
 	mmpll8.no_prepared_reconfig = true;
 	mmpll8.c.ops = &clk_ops_alpha_pll;
 
-	mmpll9.c.rate = 1248000000;
-	mmpll9.c.fmax[VDD_DIG_LOWER] = 624000000;
-	mmpll9.c.fmax[VDD_DIG_LOW] = 624000000;
-	mmpll9.c.fmax[VDD_DIG_NOMINAL] = 1248000000;
-	mmpll9.c.fmax[VDD_DIG_HIGH] = 1248000000;
+	mmpll9.c.rate = 1400000000;
+	mmpll9.c.fmax[VDD_DIG_LOWER] = 700000000;
+	mmpll9.c.fmax[VDD_DIG_LOW] = 700000000;
+	mmpll9.c.fmax[VDD_DIG_NOMINAL] = 1400000000;
+	mmpll9.c.fmax[VDD_DIG_HIGH] = 1400000000;
 
 	csi0_clk_src.freq_tbl = ftbl_csi0_clk_src_v3;
 	csi1_clk_src.freq_tbl = ftbl_csi1_clk_src_v3;
