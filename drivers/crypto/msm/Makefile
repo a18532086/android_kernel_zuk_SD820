@@ -10,3 +10,5 @@ endif
 obj-$(CONFIG_CRYPTO_DEV_QCRYPTO) += qcrypto.o
 obj-$(CONFIG_CRYPTO_DEV_OTA_CRYPTO) += ota_crypto.o
 obj-$(CONFIG_CRYPTO_DEV_QCOM_ICE) += ice.o
+
+CFLAGS_qce50.o += -Wno-bool-operation

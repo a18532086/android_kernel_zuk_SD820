@@ -4,8 +4,8 @@ export TOOL_CHAIN_PATH="/home/a18532086/Downloads/gcc-linaro-7.1.1-2017.08-rc1-x
 export objdir="../out"
 compile() {
   mkdir ../out
-  make O=$objdir $CONFIG_FILE -j4 
-  make O=$objdir -j8
+  make O=$objdir ARCH=arm64 CROSS_COMPILE=$TOOL_CHAIN_PATH $CONFIG_FILE -j4 
+  make O=$objdir ARCH=arm64 CROSS_COMPILE=$TOOL_CHAIN_PATH -j8
 }
 module(){
   cd ../out

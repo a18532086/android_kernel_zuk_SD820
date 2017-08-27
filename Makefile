@@ -248,8 +248,8 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/x86/ -e s/x86_64/x86/ \
 # "make" in the configured kernel build directory always uses that.
 # Default value for CROSS_COMPILE is not to prefix executables
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
-ARCH		?= arm64
-CROSS_COMPILE	?= /home/a18532086/Downloads/gcc-linaro-7.1.1-2017.08-rc1-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+ARCH		?= $(SUBARCH)
+CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -308,7 +308,7 @@ endif
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
 
-KBUILD_MODULES := -Wno-error=switch-unreachable
+KBUILD_MODULES := 
 KBUILD_BUILTIN := 1
 
 # If we have only "make modules", don't compile built-in objects.
@@ -402,7 +402,7 @@ LINUXINCLUDE    := \
 
 KBUILD_CPPFLAGS := -D__KERNEL__
 
-KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -Wno-uninitialized -Wno-misleading-indentation -Wno-bool-operation -Wno-discarded-array-qualifiers -Wno-duplicate-decl-specifier -Wno-bool-compare -Wno-parentheses -Wno-memset-elt-size -Wno-switch-unreachable\
+KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -Wno-duplicate-decl-specifier\
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
@@ -634,6 +634,10 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
 KBUILD_CFLAGS	+= $(call cc-disable-warning,unused-const-variable,)
 KBUILD_CFLAGS	+= $(call cc-disable-warning,array-bounds,)
 KBUILD_CFLAGS   += $(call cc-disable-warning,format-truncation,)
+KBUILD_CFLAGS   += $(call cc-disable-warning,memset-elt-size,)
+KBUILD_CFLAGS   += $(call cc-disable-warning,bool-compare,)
+KBUILD_CFLAGS   += $(call cc-disable-warning,switch-unreachable,)
+KBUILD_CFLAGS   += $(call cc-disable-warning,misleading-indentation,)
 KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 KBUILD_CFLAGS	+= $(call cc-option,-fno-PIE)
 KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
@@ -641,7 +645,7 @@ KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os
 else
-KBUILD_CFLAGS	+= -O2
+KBUILD_CFLAGS	+= -O3 $(call cc-option,-fno-inline-functions)
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
