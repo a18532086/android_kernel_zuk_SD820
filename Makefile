@@ -645,7 +645,7 @@ KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os
 else
-KBUILD_CFLAGS	+= -O3 $(call cc-option,-fno-inline-functions)
+KBUILD_CFLAGS	+= -Ofast $(call cc-option,-fno-inline-functions)
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
