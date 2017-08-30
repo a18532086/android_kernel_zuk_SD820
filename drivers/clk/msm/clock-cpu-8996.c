@@ -225,7 +225,7 @@ static struct alpha_pll_vco_tbl alt_pll_vco_modes[] = {
 	VCO(3,  250000000,  500000000),
 	VCO(2,  500000000,  750000000),
 	VCO(1,  750000000, 1000000000),
-	VCO(0, 1000000000, 2304000000),
+	VCO(0, 1000000000, 2342400000),
 };
 
 static struct alpha_pll_clk perfcl_alt_pll = {
@@ -1552,11 +1552,11 @@ int __init cpu_clock_8996_early_init(void)
 					 "qcom,cpu-clock-8996-pro")) {
 		cpu_clocks_v3 = true;
 		cpu_clocks_pro = true;
-		pwrcl_early_boot_rate = PWRCL_EARLY_BOOT_RATE;
-		perfcl_early_boot_rate = PERFCL_EARLY_BOOT_RATE;
 	} else if (of_find_compatible_node(NULL, NULL,
 					 "qcom,cpu-clock-8996-v3")) {
 		cpu_clocks_v3 = true;
+		pwrcl_early_boot_rate = PWRCL_EARLY_BOOT_RATE;
+		perfcl_early_boot_rate = PERFCL_EARLY_BOOT_RATE;
 	} else if (!of_find_compatible_node(NULL, NULL,
 					 "qcom,cpu-clock-8996")) {
 		return 0;

@@ -21,30 +21,4 @@
 	model = "Qualcomm Technologies, Inc. MSM 8996 v3 + PMI8996 MTP";
 	compatible = "qcom,msm8996-mtp", "qcom,msm8996", "qcom,mtp";
 	qcom,board-id = <8 0>;
-	};
-
-&apc_apm {
-	compatible = "qcom,msm8996pro-apm";
-	/delete-property/ qcom,clock-source-override;
-};
-
-&pm8994_s11 {
-	/delete-property/ qcom,recal-mask;
-};
-
-&apcc_cpr {
-	compatible = "qcom,cpr3-msm8996pro-hmss-regulator";
-	qcom,cpr-interrupt-affinity = <&CPU0 &CPU1>;
-};
-
-&kryo0_vreg {
-	qcom,ldo-headroom-voltage = <150000>;
-};
-
-&kryo1_vreg {
-	qcom,ldo-headroom-voltage = <170000>;
-};
-
-&clock_cpu {
-	compatible = "qcom,cpu-clock-8996-pro";
 };
