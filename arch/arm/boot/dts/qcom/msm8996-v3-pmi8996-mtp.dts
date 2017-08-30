@@ -38,11 +38,11 @@
 };
 
 &kryo0_vreg {
-	qcom,ldo-headroom-voltage = <80000>;
+	qcom,ldo-headroom-voltage = <150000>;
 };
 
 &kryo1_vreg {
-	qcom,ldo-headroom-voltage = <130000>;
+	qcom,ldo-headroom-voltage = <170000>;
 };
 
 &clock_cpu {

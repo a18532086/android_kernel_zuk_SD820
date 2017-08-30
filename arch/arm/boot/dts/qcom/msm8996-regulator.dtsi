@@ -1073,7 +1073,7 @@
 					/* Speed bin 1 */
 					<21 21 21 21 21 21 21 21>;
 
-				qcom,ldo-min-headroom-voltage = <150000>;
+				qcom,ldo-min-headroom-voltage = <170000>;
 				qcom,ldo-max-headroom-voltage = <470000>;
 				qcom,ldo-max-voltage = <890000>;
 				qcom,uses-mem-acc;
