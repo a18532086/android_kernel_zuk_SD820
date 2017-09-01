@@ -27,6 +27,8 @@
 #include <linux/of_platform.h>
 #include <linux/pm_opp.h>
 #include <linux/pm_qos.h>
+#include <linux/cpufreq.h>
+#include <linux/regulator/driver.h>
 
 #include <asm/cputype.h>
 
@@ -1286,6 +1288,7 @@ static void populate_opp_table(struct platform_device *pdev)
 	    "Failed to add OPP levels for CBF\n");
 }
 
+
 static void cpu_clock_8996_pro_fixup(void)
 {
 	cbf_pll.vals.post_div_masked = 0x300;
@@ -1459,6 +1462,36 @@ static int cpu_clock_8996_driver_probe(struct platform_device *pdev)
 	return 0;
 }
 
+#ifdef CONFIG_REGULATOR_CPR3_VOLTAGE_CONTROL
+extern int cpr_regulator_get_voltage(struct regulator *regulator,int cori,int ord);
+		
+ssize_t get_Voltages(char *buf)
+{
+	ssize_t count = 0;
+	int i, uv[4], k, j;
+
+	if (!buf)
+		return 0;
+	for (k = 1; k <= 2; k++ )
+	{
+		struct cpu_clk_8996 t_clk;
+		char st[10];
+		if (k==1) t_clk = pwrcl_clk , strcpy( st ,"小核" );
+		else t_clk = perfcl_clk , strcpy( st , "大核" );
+		count += sprintf(buf + count, "%s:\n",st);
+		for (i = 1; i < t_clk.c.num_fmax; i++) 
+		{
+			for (j = 1;j <= 3;j++)
+			uv[j] = cpr_regulator_get_voltage(
+					t_clk.c.vdd_class->regulator[0],
+					t_clk.c.vdd_class->vdd_uv[i],j);
+			count += sprintf(buf + count, "%luMhz:上限%dmV 当前%dmV 下限%dmV\n",
+					t_clk.c.fmax[i] / 1000000,uv[1] / 1000,uv[2] / 1000,uv[3] / 1000);
+		}
+	}
+	return count;
+}
+#endif
 static struct of_device_id match_table[] = {
 	{ .compatible = "qcom,cpu-clock-8996" },
 	{ .compatible = "qcom,cpu-clock-8996-v3" },

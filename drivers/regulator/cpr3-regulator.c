@@ -4144,7 +4144,21 @@ static struct regulator_ops cpr3_regulator_ops = {
 	.list_voltage		= cpr3_regulator_list_voltage,
 	.list_corner_voltage	= cpr3_regulator_list_corner_voltage,
 };
+#ifdef CONFIG_REGULATOR_CPR3_VOLTAGE_CONTROL
+inline int cpr_regulator_get_voltage(struct regulator *regulator,int cori,int ord)
+{
+	struct cpr3_regulator *cpr_vreg = regulator_get_drvdata(regulator);
+	cori--;
+	if (cori >= 0 && cori < cpr_vreg->corner_count)
+	{
+		if (ord==1) return cpr_vreg->corner[cori].ceiling_volt;
+		else if (ord==3) return cpr_vreg->corner[cori].floor_volt;
+		else return cpr_vreg->corner[cori].last_volt;
+	}
 
+	return -EINVAL;
+}
+#endif
 /**
  * cprh_regulator_get_voltage() - get the voltage corner for the CPR3 regulator
  *			associated with the regulator device
